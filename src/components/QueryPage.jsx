@@ -5,6 +5,7 @@ export default class QueryPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            view: ''
         }
         this.addNode = this.addNode.bind(this);
         this.readNode = this.readNode.bind(this);
@@ -33,6 +34,7 @@ export default class QueryPage extends React.Component {
                 <RaisedButton label="Read" primary={true} style={style} onClick={this.readNode} />
                 <RaisedButton label="Update" primary={true} style={style} onClick={this.updateNode} />
                 <RaisedButton label="Delete" primary={true} style={style} onClick={this.deleteNode} />
+                <br/>
                 {this.state.view}
             </div>
         )
