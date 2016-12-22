@@ -1,11 +1,12 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import AddPage from './AddPage.jsx';
 
 export default class QueryPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            view: ''
+            view: 0
         }
         this.addNode = this.addNode.bind(this);
         this.readNode = this.readNode.bind(this);
@@ -13,18 +14,21 @@ export default class QueryPage extends React.Component {
         this.deleteNode = this.deleteNode.bind(this);
     }
     addNode() {
-        this.setState({view: '<AddPage />'});
+        this.setState({view: 1});
     }
     readNode() {
-        this.setState({view: '<ReadPage />'});
+        this.setState({view: 2});
     }
     updateNode() {
-        this.setState({view: '<UpdatePage />'});
+        this.setState({view: 3});
     }
     deleteNode() {
-        this.setState({view: '<DeletePage />'});
+        this.setState({view: 4});
     }
     render(){
+        let show = '';
+        if(this.state.view == 1)
+            show = <AddPage />;
         const style = {
             margin: 12
         };
@@ -35,7 +39,7 @@ export default class QueryPage extends React.Component {
                 <RaisedButton label="Update" primary={true} style={style} onClick={this.updateNode} />
                 <RaisedButton label="Delete" primary={true} style={style} onClick={this.deleteNode} />
                 <br/>
-                {this.state.view}
+                {show}
             </div>
         )
     }
