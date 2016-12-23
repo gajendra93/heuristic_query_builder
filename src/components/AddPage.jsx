@@ -6,14 +6,26 @@ export default class AddPage extends React.Component {
 	constructor(props) {
     	super(props);
     	this.state ={
-    		showQuery: ''
+    		showQuery: 0,
+    		addVal: ''
     	}
+    	this.handleChange = this.handleChange.bind(this);
     	this.addQuery = this.addQuery.bind(this);
-    };
+    }
+
+    handleChange(event) {
+    	this.setState({addVal: event.target.value});
+    }
+
     addQuery() {
-		this.setState({showQuery: '<TextField disabled={true} hintText="Query Generated" />'});
+		this.setState({showQuery: 1});
 	}
+
 	render(){
+		let show = '';
+		let query = 'create(n:node{name: "'+this.state.addVal+'"})';
+		if(this.state.showQuery == 1)
+			show = <TextField disabled={true} hintText="Query Generated" value={query} />;
 
 		const style = {
 			margin: 12
@@ -22,14 +34,16 @@ export default class AddPage extends React.Component {
 		return (
 			<div>
 				<TextField
-					hintText="Name of a node"
+					hintText="Enter name of node"
 					floatingLabelText="Add a new node"
+					value = {this.state.addVal}
+					onChange = {this.handleChange}
 				/>
 				
 				<div>
 					<RaisedButton label="Add" primary={true} style={style} onClick={this.addQuery}/>
 				</div>
-				{this.state.showQuery}
+				{show}
 			</div>
 		)
 	}
